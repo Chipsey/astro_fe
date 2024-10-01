@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { LandingPageViewComponent } from './landing-page-view/landing-page-view.component';
-
+import { SharedModule } from '../../shared/shared.module';
+import { NgxParallaxStarsComponent } from 'ngx-parallax-stars';
 
 @NgModule({
   declarations: [LandingPageViewComponent],
   imports: [
     CommonModule,
-    LandingPageRoutingModule
-  ]
+    LandingPageRoutingModule,
+    SharedModule,
+    NgxParallaxStarsComponent,
+  ],
 })
-export class LandingPageModule { }
+export class LandingPageModule {}

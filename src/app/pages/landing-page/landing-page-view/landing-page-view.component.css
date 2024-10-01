@@ -1,0 +1,133 @@
+/* Shared section styles */
+section {
+  height: 100vh; /* Each section takes up full viewport height */
+  position: relative;
+}
+
+.hero {
+  position: absolute;
+  height: 100vh; /* Ensure full height */
+  width: 100%;
+  margin-top: -10rem;
+  background: url("../../../../assets/images/universe-1.jpg") no-repeat center
+    center;
+  background-size: cover;
+  overflow: hidden; /* Prevent overflow issues */
+  z-index: 0; /* Layer this below the stars */
+}
+
+.hero-content {
+  position: relative;
+  margin-top: -7rem;
+  z-index: 2; /* Ensure content is above everything else */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  z-index: 1; /* Adjust to ensure it layers correctly */
+}
+
+.container {
+  position: relative;
+  z-index: 3; /* Ensures content is above the gradient */
+}
+
+.features {
+  height: 70vh;
+  z-index: 3; /* Ensures content is above the gradient */
+}
+
+/* Make all text white */
+.text-white {
+  color: #fff;
+}
+
+.parallax-container {
+  position: relative;
+}
+
+ngx-parallax-stars {
+  position: fixed; /* This keeps it static */
+  top: 0;
+  left: 0;
+  opacity: 0.25;
+  width: 100%;
+  height: 500vh; /* Fill the viewport height */
+  z-index: 1; /* Layer this in front of the hero image */
+}
+
+.circle {
+  position: relative;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.card {
+  position: absolute;
+  width: 13rem; /* Adjust as needed */
+  height: 15rem; /* Adjust as needed */
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+.zodiac-circle {
+  position: relative; /* Ensure absolute positioning works for buttons */
+  z-index: 5;
+}
+
+.rotate-button {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 10; /* Make sure the buttons are above the cards */
+  transition: background-color 0.3s;
+}
+
+.rotate-button:hover {
+  background-color: rgba(200, 200, 200, 0.7);
+}
+
+.left {
+  left: 20px; /* Adjust the distance from the left edge */
+}
+
+.right {
+  right: 20px; /* Adjust the distance from the right edge */
+}
+
+.cover-zodiac-circle {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+  z-index: 5;
+  position: absolute;
+  bottom: 0;
+  height: 50vh; /* Full height */
+}

@@ -1,14 +1,104 @@
-<section class="hero bg-light py-5 text-center">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <h1 class="display-4">Welcome to Your Brand</h1>
-        <p class="lead">Your description goes here. Make it compelling.</p>
-        <a href="#" class="btn btn-primary btn-lg">Get Started</a>
-      </div>
-      <div class="col-md-6">
-        <img src="assets/hero-image.png" alt="Hero Image" class="img-fluid" />
-      </div>
+<ngx-parallax-stars
+  [layers]="layers"
+  [style.transform]="'translateY(' + scrollY * -0.1 + 'px)'"
+></ngx-parallax-stars>
+
+<div class="parallax-container">
+  <section
+    class="hero text-center d-flex align-items-center justify-content-center parallax"
+    data-speed="0.95"
+  ></section>
+
+  <section
+    class="hero-content text-center d-flex align-items-center justify-content-center fade-in"
+    id="section1"
+  >
+    <div class="container text-center">
+      <img
+        src="../../../../assets/images/logo.png"
+        class="w-25 p-5 mx-auto glassy-image"
+      />
+      <h1 class="text-white">Welcome to AstroCope</h1>
+      <p class="text-white w-75 mx-auto p-3">
+        Discover the stars and unlock the secrets of your destiny with
+        AstroCope, the ultimate horoscope app designed to guide you through
+        life’s challenges and opportunities. Whether you're a curious beginner
+        or a seasoned astrology enthusiast, AstroCope offers personalized
+        insights tailored to your unique zodiac sign.
+      </p>
+      <a href="#" class="btn btn-primary">Get Started</a>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Section 2 (Features Section) -->
+  <section
+    class="features text-center d-flex align-items-center justify-content-center bg-glass fade-in"
+    id="section2"
+  >
+    <div class="container">
+      <h2 class="text-white">Our Features</h2>
+      <app-card
+        [imageSrc]="'../../../../assets/images/universe-1.jpg'"
+        [gifSrc]="'../../../../assets/gifs/colors.gif'"
+        [title]="'Custom Card Title'"
+        [description]="'This is a custom description for the card.'"
+        [buttonLabel]="'Click Me'"
+      ></app-card>
+      <p class="text-white w-75 mx-auto p-3 mt-3">
+        Explore the amazing features we offer to make your experience better.
+        Whether you're a curious beginner or a seasoned astrology enthusiast,
+        AstroCope offers personalized insights tailored to your unique zodiac
+        sign.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3 (Services Section) -->
+  <section
+    class="zodiac-circle text-center d-flex align-items-center justify-content-center fade-in"
+    id="section3"
+  >
+    <button (click)="rotateLeft()" class="rotate-button left">Left</button>
+    <div class="circle">
+      <div
+        class="card"
+        *ngFor="let card of cards; let i = index"
+        [ngStyle]="{
+          transform:
+            'rotate(' +
+            (i * rotationDegree + rotationAngle) +
+            'deg) translateY(-20rem)'
+        }"
+      >
+        {{ card }}
+      </div>
+      <div class="cover-zodiac-circle w-100 h-50"></div>
+    </div>
+    <button (click)="rotateRight()" class="rotate-button right">Right</button>
+  </section>
+
+  <section
+    class="services text-center d-flex align-items-center justify-content-center fade-in"
+    id="section4"
+  >
+    <div class="container">
+      <h2 class="text-white">Our Services</h2>
+      <p class="text-white">
+        We provide top-notch services to meet all your needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 4 (Contact Section) -->
+  <section
+    class="contact text-center d-flex align-items-center justify-content-center fade-in"
+    id="section5"
+  >
+    <div class="container">
+      <h2 class="text-white">Get in Touch</h2>
+      <p class="text-white">We’d love to hear from you. Contact us anytime.</p>
+    </div>
+  </section>
+
+  <app-parallax></app-parallax>
+</div>

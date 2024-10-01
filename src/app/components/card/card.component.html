@@ -1,1 +1,13 @@
-<p>card works!</p>
+<div class="card">
+  <img class="card-img-top" [src]="imageSrc" alt="Card image" />
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <p class="card-text">{{ description }}</p>
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="#" class="btn btn-primary">{{ buttonLabel }}</a>
+      <div class="card-gif">
+        <img [src]="gifSrc" alt="Card GIF" />
+      </div>
+    </div>
+  </div>
+</div>

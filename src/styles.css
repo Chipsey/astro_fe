@@ -2,4 +2,69 @@
 body {
   background-color: black;
   margin: 0;
+  color: rgb(255, 255, 255);
+}
+
+h1 {
+  color: white;
+}
+
+.btn-primary {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ) !important; /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for glassy look */
+  border: 0;
+  color: white;
+  padding: 10px 20px;
+  transition: background 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Optional hover effect */
+.btn-primary:hover {
+  background-color: rgba(
+    145,
+    145,
+    145,
+    0.5
+  ) !important; /* Slightly darker on hover */
+}
+
+p {
+  font-size: medium;
+}
+
+.img-color-white {
+  filter: brightness(0) invert(1);
+}
+
+.glassy-image {
+  filter: brightness(0) invert(1); /* Apply blur for glassy effect */
+  opacity: 0.5; /* Make the image semi-transparent */
+  backdrop-filter: blur(20px); /* Create background blur effect */
+  mix-blend-mode: screen;
+}
+
+.bg-glass {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+  ) !important; /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for glassy look */
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px); /* Moves section down initially */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0); /* Moves section back to its original position */
 }
