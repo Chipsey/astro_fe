@@ -68,3 +68,43 @@ p {
   opacity: 1;
   transform: translateY(0); /* Moves section back to its original position */
 }
+
+.border-r1 {
+  border-radius: 10px !important;
+}
+
+.border-r2 {
+  border-radius: 20px !important;
+}
+
+.border-r3 {
+  border-radius: 30px !important;
+}
+
+.font-small {
+  font-size: 0.8rem !important;
+}
+
+.width-1 {
+  width: 10rem !important;
+}
+
+.width-2 {
+  width: 20rem !important;
+}
+
+.width-3 {
+  width: 30rem !important;
+}
+
+.width-4 {
+  width: 40rem !important;
+}
+
+.form-label {
+  text-align: left !important;
+}
+
+.text-start {
+  text-align: left !important;
+}

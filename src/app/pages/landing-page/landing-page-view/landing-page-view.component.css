@@ -64,6 +64,7 @@ ngx-parallax-stars {
 
 .circle {
   position: relative;
+  top: 25vh;
   width: 100vw; /* Full width */
   height: 100vh; /* Full height */
   display: flex;
@@ -73,9 +74,8 @@ ngx-parallax-stars {
 
 .card {
   position: absolute;
-  width: 13rem; /* Adjust as needed */
-  height: 15rem; /* Adjust as needed */
-  background-color: #fff;
+  width: 10rem; /* Adjust as needed */
+  height: 1rem; /* Adjust as needed */
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -83,11 +83,14 @@ ngx-parallax-stars {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   z-index: 3;
+  cursor: pointer;
 }
 
 .zodiac-circle {
+  height: 100vh;
   position: relative; /* Ensure absolute positioning works for buttons */
   z-index: 5;
+  overflow-y: hidden;
 }
 
 .rotate-button {
@@ -101,6 +104,33 @@ ngx-parallax-stars {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   z-index: 10; /* Make sure the buttons are above the cards */
+  transition: background-color 0.3s;
+}
+
+.rotate-button-left {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 8px;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+  padding: 4rem 4rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 25; /* Make sure the buttons are above the cards */
+  transition: background-color 0.3s;
+}
+.rotate-button-right {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 8px;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  padding: 4rem 4rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 25; /* Make sure the buttons are above the cards */
   transition: background-color 0.3s;
 }
 
@@ -129,5 +159,17 @@ ngx-parallax-stars {
   z-index: 5;
   position: absolute;
   bottom: 0;
-  height: 50vh; /* Full height */
+  height: 50rem;
+}
+
+.center-content {
+  top: 30%;
+  left: 50%;
+  text-align: center;
+  z-index: 1;
+}
+
+.center-title {
+  font-size: 1rem;
+  color: #7e7e7e;
 }

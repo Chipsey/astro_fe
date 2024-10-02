@@ -30,6 +30,149 @@
     </div>
   </section>
 
+  <!-- Section 3 (Services Section) -->
+  <section
+    class="zodiac-circle text-center d-flex align-items-center justify-content-center fade-in"
+    id="section3"
+  >
+    <div *ngIf="!(selectedZodiac >= 0)">
+      <div class="circle position-relative">
+        <!-- Center content -->
+        <div class="center-content d-flex">
+          <button
+            (mouseenter)="setRotationSpeed(10, -1)"
+            (mouseleave)="setRotationSpeed(60, -1)"
+            (click)="rotateLeft()"
+            class="rotate-button-left bg-glass text-white"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button
+            (mouseenter)="setRotationSpeed(10, 1)"
+            (mouseleave)="setRotationSpeed(60, 1)"
+            (click)="rotateRight()"
+            class="rotate-button-right bg-glass text-white"
+          >
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <!-- <h4 class="center-title">Select Your Zodiac Sign To Get Started</h4> -->
+        </div>
+
+        <div
+          class="card"
+          (mouseenter)="setRotationSpeed(100000, 1)"
+          (mouseleave)="setRotationSpeed(60, 1)"
+          *ngFor="let card of cards; let i = index"
+          [ngStyle]="{
+            transform:
+              'rotate(' +
+              (i * rotationDegree + rotationAngle) +
+              'deg) translateY(-20rem)'
+          }"
+          (click)="setSelectedZodiac(i)"
+        >
+          <app-zodiac-card
+            [imageSrc]="card.imageSrc"
+            [title]="card.title"
+            [description]="card.description"
+            [buttonLabel]="card.buttonLabel"
+          >
+          </app-zodiac-card>
+        </div>
+        <div class="cover-zodiac-circle w-100 h-50"></div>
+      </div>
+    </div>
+    <!-- Display when a zodiac sign is selected -->
+    <div
+      *ngIf="selectedZodiac >= 0"
+      class="d-flex justify-content-between align-items-center"
+    >
+      <!-- Left Side: Image, Title, and Description -->
+      <div class="left-side">
+        <button
+          (click)="unsetSelectedZodiac()"
+          class="rotate-button left bg-glass text-white"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="zodiac-info w-50">
+          <img
+            [src]="selectedCard.imageSrc"
+            alt="Zodiac Image"
+            class="zodiac-img w-100 mb-5"
+          />
+          <h3>{{ selectedCard.title }}</h3>
+          <p>{{ selectedCard.description }}</p>
+        </div>
+      </div>
+
+      <!-- Right Side: Input fields for birth details -->
+      <div
+        class="w-50 p-4 bg-glass text-start text-white border-r1 font-small width-3"
+      >
+        <form>
+          <!-- Birth Time Picker -->
+          <div class="mb-4">
+            <label for="birthTime" class="form-label">Pick Birth Time:</label>
+            <input
+              type="time"
+              id="birthTime"
+              [(ngModel)]="birthTime"
+              name="birthTime"
+              class="form-control bg-glass text-white border-0"
+            />
+          </div>
+
+          <!-- Birth Date Picker -->
+          <div class="mb-4">
+            <label for="birthDate" class="form-label">Pick Birth Date:</label>
+            <input
+              type="date"
+              id="birthDate"
+              [(ngModel)]="birthDate"
+              name="birthDate"
+              class="form-control bg-glass text-white border-0"
+            />
+          </div>
+
+          <!-- Birth Location Input -->
+          <div class="mb-4">
+            <label for="birthLocation" class="form-label"
+              >Input Birth Location:</label
+            >
+            <input
+              type="text"
+              id="birthLocation"
+              [(ngModel)]="birthLocation"
+              placeholder="Input your birth location"
+              name="birthLocation"
+              class="form-control bg-glass text-white border-0"
+            />
+          </div>
+
+          <!-- Dropdown with options -->
+          <div class="mb-4">
+            <label for="optionsDropdown" class="form-label"
+              >Choose an Option:</label
+            >
+            <select
+              id="optionsDropdown"
+              [(ngModel)]="selectedOption"
+              name="optionsDropdown"
+              class="form-select bg-glass text-white border-0"
+            >
+              <option value="" disabled selected>Select an option</option>
+              <!-- Placeholder -->
+              <option *ngFor="let option of dropdownOptions" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Section 2 (Features Section) -->
   <section
     class="features text-center d-flex align-items-center justify-content-center bg-glass fade-in"
@@ -51,30 +194,6 @@
         sign.
       </p>
     </div>
-  </section>
-
-  <!-- Section 3 (Services Section) -->
-  <section
-    class="zodiac-circle text-center d-flex align-items-center justify-content-center fade-in"
-    id="section3"
-  >
-    <button (click)="rotateLeft()" class="rotate-button left">Left</button>
-    <div class="circle">
-      <div
-        class="card"
-        *ngFor="let card of cards; let i = index"
-        [ngStyle]="{
-          transform:
-            'rotate(' +
-            (i * rotationDegree + rotationAngle) +
-            'deg) translateY(-20rem)'
-        }"
-      >
-        {{ card }}
-      </div>
-      <div class="cover-zodiac-circle w-100 h-50"></div>
-    </div>
-    <button (click)="rotateRight()" class="rotate-button right">Right</button>
   </section>
 
   <section

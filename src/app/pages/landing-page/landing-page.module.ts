@@ -5,6 +5,7 @@ import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { LandingPageViewComponent } from './landing-page-view/landing-page-view.component';
 import { SharedModule } from '../../shared/shared.module';
 import { NgxParallaxStarsComponent } from 'ngx-parallax-stars';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LandingPageViewComponent],
@@ -13,6 +14,7 @@ import { NgxParallaxStarsComponent } from 'ngx-parallax-stars';
     LandingPageRoutingModule,
     SharedModule,
     NgxParallaxStarsComponent,
+    FormsModule,
   ],
 })
 export class LandingPageModule {}

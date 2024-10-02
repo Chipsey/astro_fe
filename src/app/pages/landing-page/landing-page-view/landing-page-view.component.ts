@@ -7,7 +7,6 @@ import { StarLayer } from 'ngx-parallax-stars';
   styleUrl: './landing-page-view.component.css',
 })
 export class LandingPageViewComponent implements OnInit {
-  selectedZodiac = 0;
   ngOnInit(): void {
     const sections = document.querySelectorAll('.fade-in');
 
@@ -29,6 +28,12 @@ export class LandingPageViewComponent implements OnInit {
     sections.forEach((section) => {
       observer.observe(section);
     });
+    this.startAutoRotateRight();
+  }
+
+  ngOnDestroy(): void {
+    // Stop the auto-rotation when the component is destroyed
+    this.stopAutoRotate();
   }
 
   layers: StarLayer[] = [
@@ -66,49 +71,165 @@ export class LandingPageViewComponent implements OnInit {
 
   scrollY: number = 0;
 
-  cards: string[] = [
-    'Card 1',
-    'Card 2',
-    'Card 3',
-    'Card 4',
-    'Card 5',
-    'Card 6',
-    'Card 7',
-    'Card 8',
-    'Card 9',
-    'Card 10',
-    'Card 11',
-    'Card 12',
+  cards = [
+    {
+      imageSrc: '../../../../assets/images/aries.png',
+      title: 'Aries',
+      description: 'Aries is the first astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/taurus.png',
+      title: 'Taurus',
+      description: 'Taurus is the second astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/gemini.png',
+      title: 'Gemini',
+      description: 'Gemini is the third astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/cancer.png',
+      title: 'Cancer',
+      description: 'Cancer is the fourth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/leo.png',
+      title: 'Leo',
+      description: 'Leo is the fifth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/virgo.png',
+      title: 'Virgo',
+      description: 'Virgo is the sixth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/libra.png',
+      title: 'Libra',
+      description: 'Libra is the seventh astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/scorpio.png',
+      title: 'Scorpio',
+      description: 'Scorpio is the eighth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/sagittarius.png',
+      title: 'Sagittarius',
+      description: 'Sagittarius is the ninth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/capricorn.png',
+      title: 'Capricorn',
+      description: 'Capricorn is the tenth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/aquarius.png',
+      title: 'Aquarius',
+      description: 'Aquarius is the eleventh astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
+    {
+      imageSrc: '../../../../assets/images/pisces.png',
+      title: 'Pisces',
+      description: 'Pisces is the twelfth astrological sign in the zodiac.',
+      buttonLabel: 'Learn More',
+    },
   ];
 
   rotationDegree: number;
   rotationAngle: number;
+  autoRotateInterval: any;
+  selectedCard: any;
+  selectedZodiac = -1;
+  birthTime: string = '';
+  birthDate: string = '';
+  birthLocation: string = '';
+  selectedOption: string = '';
+  rotationSpeed: number = 60;
+
+  dropdownOptions: string[] = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
 
   constructor() {
     this.rotationDegree = 360 / this.cards.length;
     this.rotationAngle = 0;
   }
   rotateLeft() {
-    this.rotationAngle -= this.rotationDegree; // Decrease the angle to rotate counterclockwise
-    console.log(this.rotationAngle); // For debugging
+    this.rotationAngle -= this.rotationDegree / 2;
   }
 
   rotateRight() {
-    this.rotationAngle += this.rotationDegree; // Increase the angle to rotate clockwise
-    console.log(this.rotationAngle); // For debugging
+    this.rotationAngle += this.rotationDegree / 2;
+  }
+
+  autoRotateRight() {
+    this.rotationAngle += 0.2;
+  }
+
+  autoRotateLeft() {
+    this.rotationAngle -= 0.2;
+  }
+
+  startAutoRotateRight(): void {
+    this.autoRotateInterval = setInterval(() => {
+      this.autoRotateRight();
+    }, this.rotationSpeed);
+  }
+
+  startAutoRotateLeft(): void {
+    this.autoRotateInterval = setInterval(() => {
+      this.autoRotateLeft();
+    }, this.rotationSpeed);
+  }
+
+  stopAutoRotate(): void {
+    if (this.autoRotateInterval) {
+      clearInterval(this.autoRotateInterval);
+    }
+  }
+
+  setSelectedZodiac(id: number): void {
+    this.selectedZodiac = id;
+    this.selectedCard = this.cards[id];
+    console.log(this.selectedCard);
+    this.rotationSpeed = 60;
+  }
+
+  setRotationSpeed(speed: number, direction: number): void {
+    console.log(speed, direction);
+    this.rotationSpeed = speed;
+
+    // Stop any existing rotation
+    this.stopAutoRotate();
+
+    // Start the appropriate auto-rotation
+    if (direction < 0) {
+      this.startAutoRotateLeft();
+    } else {
+      this.startAutoRotateRight();
+    }
+  }
+
+  unsetSelectedZodiac(): void {
+    this.selectedCard = null;
+    this.selectedZodiac = -1;
   }
 
   @HostListener('window:scroll', [])
   onScroll() {
-    // Update scroll position
     this.scrollY = window.scrollY;
 
-    // Here you can adjust the star layers based on scrollY if needed
     this.updateStarLayers(this.scrollY);
   }
 
-  private updateStarLayers(scrollY: number) {
-    // Optionally adjust star layers' properties based on scrollY
-    // For instance, increase density or change speed based on scroll position
-  }
+  private updateStarLayers(scrollY: number) {}
 }
