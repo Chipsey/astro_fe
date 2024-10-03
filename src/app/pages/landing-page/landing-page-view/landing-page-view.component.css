@@ -87,7 +87,7 @@ ngx-parallax-stars {
 }
 
 .zodiac-circle {
-  height: 100vh;
+  height: 80vh;
   position: relative; /* Ensure absolute positioning works for buttons */
   z-index: 5;
   overflow-y: hidden;

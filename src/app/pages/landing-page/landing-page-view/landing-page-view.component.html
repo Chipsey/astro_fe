@@ -9,27 +9,6 @@
     data-speed="0.95"
   ></section>
 
-  <section
-    class="hero-content text-center d-flex align-items-center justify-content-center fade-in"
-    id="section1"
-  >
-    <div class="container text-center">
-      <img
-        src="../../../../assets/images/logo.png"
-        class="w-25 p-5 mx-auto glassy-image"
-      />
-      <h1 class="text-white">Welcome to AstroCope</h1>
-      <p class="text-white w-75 mx-auto p-3">
-        Discover the stars and unlock the secrets of your destiny with
-        AstroCope, the ultimate horoscope app designed to guide you through
-        life’s challenges and opportunities. Whether you're a curious beginner
-        or a seasoned astrology enthusiast, AstroCope offers personalized
-        insights tailored to your unique zodiac sign.
-      </p>
-      <a href="#" class="btn btn-primary">Get Started</a>
-    </div>
-  </section>
-
   <!-- Section 3 (Services Section) -->
   <section
     class="zodiac-circle text-center d-flex align-items-center justify-content-center fade-in"
@@ -84,7 +63,7 @@
     </div>
     <!-- Display when a zodiac sign is selected -->
     <div
-      *ngIf="selectedZodiac >= 0"
+      *ngIf="selectedZodiac >= 0 && !isShowResults"
       class="d-flex justify-content-between align-items-center"
     >
       <!-- Left Side: Image, Title, and Description -->
@@ -110,17 +89,23 @@
       <div
         class="w-50 p-4 bg-glass text-start text-white border-r1 font-small width-3"
       >
-        <form>
+        <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
           <!-- Birth Time Picker -->
           <div class="mb-4">
             <label for="birthTime" class="form-label">Pick Birth Time:</label>
             <input
               type="time"
               id="birthTime"
-              [(ngModel)]="birthTime"
+              formControlName="birthTime"
               name="birthTime"
               class="form-control bg-glass text-white border-0"
             />
+          </div>
+          <div
+            *ngIf="isFieldValid(inputForm, 'birthTime')"
+            class="error-msg-display"
+          >
+            Birth Time is required
           </div>
 
           <!-- Birth Date Picker -->
@@ -129,7 +114,7 @@
             <input
               type="date"
               id="birthDate"
-              [(ngModel)]="birthDate"
+              formControlName="birthDate"
               name="birthDate"
               class="form-control bg-glass text-white border-0"
             />
@@ -143,7 +128,7 @@
             <input
               type="text"
               id="birthLocation"
-              [(ngModel)]="birthLocation"
+              formControlName="birthLocation"
               placeholder="Input your birth location"
               name="birthLocation"
               class="form-control bg-glass text-white border-0"
@@ -157,19 +142,66 @@
             >
             <select
               id="optionsDropdown"
-              [(ngModel)]="selectedOption"
+              formControlName="selectedOption"
               name="optionsDropdown"
               class="form-select bg-glass text-white border-0"
             >
               <option value="" disabled selected>Select an option</option>
-              <!-- Placeholder -->
-              <option *ngFor="let option of dropdownOptions" [value]="option">
-                {{ option }}
+              <option
+                *ngFor="let option of dropdownOptions"
+                [value]="option?.id"
+              >
+                {{ option?.text }}
               </option>
             </select>
           </div>
+
+          <!-- Submit button -->
+          <button *ngIf="!isDataLoading" type="submit" class="btn btn-primary">
+            Submit
+          </button>
+          <button *ngIf="isDataLoading" disabled class="btn btn-primary">
+            Loading
+          </button>
         </form>
       </div>
+    </div>
+    <div *ngIf="selectedZodiac >= 0 && isShowResults" class="w-50">
+      <h1 class="fw-bold">{{ selectedOptionTitle }}</h1>
+      <div *ngFor="let yearData of storedData" class="year-data">
+        <h3 class="year-title">{{ yearData?.year }}</h3>
+        <div *ngFor="let entry of yearData?.data" class="data-entry">
+          <h4 class="entry-title">{{ entry?.title }}</h4>
+          <p class="entry-content font-small">{{ entry?.data }}</p>
+        </div>
+      </div>
+      <button
+        (click)="handleBackToOptions()"
+        class="rotate-button bg-glass text-white"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+    </div>
+  </section>
+
+  <section
+    class="hero-content text-center d-flex align-items-center justify-content-center fade-in"
+    id="section1"
+  >
+    <div class="container text-center">
+      <img
+        src="../../../../assets/images/logo.png"
+        class="w-25 p-5 mx-auto glassy-image"
+      />
+      <h1 class="text-white">Welcome to AstroCope</h1>
+      <p class="text-white w-75 mx-auto p-3">
+        Discover the stars and unlock the secrets of your destiny with
+        AstroCope, the ultimate horoscope app designed to guide you through
+        life’s challenges and opportunities. Whether you're a curious beginner
+        or a seasoned astrology enthusiast, AstroCope offers personalized
+        insights tailored to your unique zodiac sign.
+      </p>
+      <a href="#" class="btn btn-primary">Get Started</a>
     </div>
   </section>
 
@@ -180,13 +212,17 @@
   >
     <div class="container">
       <h2 class="text-white">Our Features</h2>
-      <app-card
-        [imageSrc]="'../../../../assets/images/universe-1.jpg'"
-        [gifSrc]="'../../../../assets/gifs/colors.gif'"
-        [title]="'Custom Card Title'"
-        [description]="'This is a custom description for the card.'"
-        [buttonLabel]="'Click Me'"
-      ></app-card>
+      <div class="d-flex justify-content-center">
+        <div class="w-50">
+          <app-card
+            [imageSrc]="'../../../../assets/images/universe-1.jpg'"
+            [gifSrc]="'../../../../assets/gifs/colors.gif'"
+            [title]="'Custom Card Title'"
+            [description]="'This is a custom description for the card.'"
+            [buttonLabel]="'Click Me'"
+          ></app-card>
+        </div>
+      </div>
       <p class="text-white w-75 mx-auto p-3 mt-3">
         Explore the amazing features we offer to make your experience better.
         Whether you're a curious beginner or a seasoned astrology enthusiast,

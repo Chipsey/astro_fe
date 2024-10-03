@@ -82,7 +82,15 @@ p {
 }
 
 .font-small {
-  font-size: 0.8rem !important;
+  font-size: 0.9rem !important;
+}
+
+.font-medium {
+  font-size: 1rem !important;
+}
+
+.font-large {
+  font-size: 1.2rem !important;
 }
 
 .width-1 {
