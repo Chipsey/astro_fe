@@ -25,8 +25,28 @@ export class LandingPageViewComponent implements OnInit {
   birthDate: string = '';
   birthLocation: string = '';
   selectedOption: string = '';
-  // storedData: any = '';
-  storedData: any;
+  storedData: any = '';
+  // storedData: any = [
+  //   {
+  //     year: '2024',
+  //     data: [
+  //       {
+  //         title: 'Financial Beginnings',
+  //         data: 'In 2024, your financial journey begins with a strong focus on stability and growth. The influence of your zodiac sign, Aquarius, suggests that innovation and technology could play a pivotal role in your financial endeavors this year. You may discover new opportunities through networking and collaborations, which could lead to unexpected sources of income. However, it’s essential to remain cautious with your expenses, as there might be a tendency to overspend on impulsive purchases.',
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     year: '2025',
+  //     data: [
+  //       {
+  //         title: 'Consolidation and Growth',
+  //         data: 'By 2025, you will likely see a consolidation of your financial gains from the previous year. This year is marked by a more strategic approach to your finances, possibly involving investments or savings plans that offer long-term benefits. Your ability to adapt to changing circumstances will be crucial, as economic fluctuations could present both challenges and opportunities. It is advisable to seek financial advice if considering significant investments, ensuring that your financial portfolio aligns with your future goals.',
+  //       },
+  //     ],
+  //   },
+  // ];
+
   rotationSpeed: number = 60;
   selectedOptionTitle: any;
   dropdownOptions: any[] = LIST_DATA.FUTURE_OPTIONS;
@@ -65,7 +85,7 @@ export class LandingPageViewComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private freeUserService: FreeUserService
+    private freeUserService: FreeUserService,
   ) {
     this.rotationDegree = 360 / this.cards.length;
     this.rotationAngle = 0;
@@ -109,7 +129,7 @@ export class LandingPageViewComponent implements OnInit {
       },
       {
         threshold: 0.6,
-      }
+      },
     );
 
     sections.forEach((section) => {
@@ -233,7 +253,7 @@ export class LandingPageViewComponent implements OnInit {
     }.
                     ${
                       this.dropdownOptions.find(
-                        (option) => option.id === selectedOption
+                        (option) => option.id === selectedOption,
                       )?.prompt || ''
                     }`;
 
@@ -250,7 +270,7 @@ export class LandingPageViewComponent implements OnInit {
         this.storedData = parsedData.data;
         this.isShowResults = true;
       } else {
-        console.log('Error: ', response?.message);
+        this.save();
       }
       // this.storedData = [
       //   {
@@ -274,7 +294,7 @@ export class LandingPageViewComponent implements OnInit {
       // ];
       this.isShowResults = true;
     } catch (error) {
-      console.error('Error:', error);
+      this.save();
     } finally {
       this.isDataLoading = false;
     }

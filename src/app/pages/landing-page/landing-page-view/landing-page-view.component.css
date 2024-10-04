@@ -173,3 +173,48 @@ ngx-parallax-stars {
   font-size: 1rem;
   color: #7e7e7e;
 }
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  text-align: left;
+  width: 50rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #ffffff; /* Timeline line color */
+}
+
+.event {
+  position: relative;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  width: 75%;
+}
+
+/* .event::before {
+  content: attr(data-date);
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #999;
+} */
+
+.event h5 {
+  margin-bottom: 10px;
+}
+
+.event p {
+  margin: 0;
+}
+
+.timeline-title {
+  text-align: left;
+}

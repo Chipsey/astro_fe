@@ -9,6 +9,27 @@
     data-speed="0.95"
   ></section>
 
+  <section
+    class="hero-content text-center d-flex align-items-center justify-content-center fade-in"
+    id="section1"
+  >
+    <div class="container text-center">
+      <img
+        src="../../../../assets/images/logo.png"
+        class="w-25 p-5 mx-auto glassy-image"
+      />
+      <h1 class="text-white">Welcome to AstroCope</h1>
+      <p class="text-white w-75 mx-auto p-3">
+        Discover the stars and unlock the secrets of your destiny with
+        AstroCope, the ultimate horoscope app designed to guide you through
+        life’s challenges and opportunities. Whether you're a curious beginner
+        or a seasoned astrology enthusiast, AstroCope offers personalized
+        insights tailored to your unique zodiac sign.
+      </p>
+      <a href="#" class="btn btn-primary">Get Started</a>
+    </div>
+  </section>
+
   <!-- Section 3 (Services Section) -->
   <section
     class="zodiac-circle text-center d-flex align-items-center justify-content-center fade-in"
@@ -46,7 +67,7 @@
             transform:
               'rotate(' +
               (i * rotationDegree + rotationAngle) +
-              'deg) translateY(-20rem)'
+              'deg) translateY(-20rem)',
           }"
           (click)="setSelectedZodiac(i)"
         >
@@ -166,7 +187,45 @@
         </form>
       </div>
     </div>
-    <div *ngIf="selectedZodiac >= 0 && isShowResults" class="w-50">
+    <div *ngIf="selectedZodiac >= 0 && isShowResults" class="w-100 p-5">
+      <div class="container d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h3 class="fw-bold mb-5 timeline-title">
+                {{ selectedOptionTitle }}
+              </h3>
+              <div id="content">
+                <ul class="timeline">
+                  <div *ngFor="let yearData of storedData" class="year-data">
+                    <li class="event" data-date="12:30 - 1:00pm">
+                      <h5>{{ yearData?.year }}</h5>
+                      <div
+                        *ngFor="let entry of yearData?.data"
+                        class="data-entry"
+                      >
+                        <h4>
+                          {{ entry?.title }}
+                        </h4>
+                        <p>
+                          {{ entry?.data }}
+                        </p>
+                      </div>
+                    </li>
+                  </div>
+                </ul>
+                <button
+                  (click)="handleBackToOptions()"
+                  class="rotate-button-left bg-glass text-white"
+                >
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
       <h1 class="fw-bold">{{ selectedOptionTitle }}</h1>
       <div *ngFor="let yearData of storedData" class="year-data">
         <h3 class="year-title">{{ yearData?.year }}</h3>
@@ -181,30 +240,9 @@
       >
         <i class="fas fa-chevron-left"></i>
       </button>
+      -->
     </div>
   </section>
-
-  <section
-    class="hero-content text-center d-flex align-items-center justify-content-center fade-in"
-    id="section1"
-  >
-    <div class="container text-center">
-      <img
-        src="../../../../assets/images/logo.png"
-        class="w-25 p-5 mx-auto glassy-image"
-      />
-      <h1 class="text-white">Welcome to AstroCope</h1>
-      <p class="text-white w-75 mx-auto p-3">
-        Discover the stars and unlock the secrets of your destiny with
-        AstroCope, the ultimate horoscope app designed to guide you through
-        life’s challenges and opportunities. Whether you're a curious beginner
-        or a seasoned astrology enthusiast, AstroCope offers personalized
-        insights tailored to your unique zodiac sign.
-      </p>
-      <a href="#" class="btn btn-primary">Get Started</a>
-    </div>
-  </section>
-
   <!-- Section 2 (Features Section) -->
   <section
     class="features text-center d-flex align-items-center justify-content-center bg-glass fade-in"
